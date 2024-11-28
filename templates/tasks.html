@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+<!--name of the page that will be shown on the tab-->
+{% block title %}ToDo{% endblock %}
+
+{% block content %}
+<h1 align="center">List {{ listId }}'s Tasks</h1>
+<br>
+<ul>
+    <li>Task1</li>
+    <li>Task2</li>
+    <li>Task3</li>
+</ul>
+<br>
+<br>
+<h3>Add new task</h3>
+<form action="/add/task/{{ listId }}" method="POST">
+    <div>
+        Task: <input type="text" name="task-name">
+        <br>
+        <br>
+        <input type="submit" value="Add Task">
+    </div>
+</form>
+{% endblock %}

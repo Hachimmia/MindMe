@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+<!--name of the page that will be shown on the tab-->
+{% block title %}ToDo{% endblock %}
+
+{% block content %}
+<h1 align="center">To Do Lists</h1>
+<br>
+<ul>
+    <h3><li><a href="/list/1">List1</a></li></h3>
+    <h3><li><a href="/list/2">List2</a></li></h3>
+    <h3><li><a href="/list/3">List3</a></li></h3>
+</ul>
+<br>
+<br>
+<h3>Add new List</h3>
+<form action="/add/list" method="POST">
+    <div>
+        List name: <input type="text" name="list-title">
+        <br>
+        <br>
+        <input type="submit" value="Add List">
+    </div>
+</form>
+{% endblock %}
