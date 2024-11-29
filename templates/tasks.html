@@ -3,17 +3,17 @@
 {% block title %}ToDo{% endblock %}
 
 {% block content %}
-<h1 align="center">List {{ listId }}'s Tasks</h1>
+<h1 align="center">{{ list.list }}'s Tasks</h1>
 <br>
 <ul>
-    <li>Task1</li>
-    <li>Task2</li>
-    <li>Task3</li>
+    {% for task in tasks %}
+        <li>{{ task.task }}</li>
+    {% endfor %}
 </ul>
 <br>
 <br>
 <h3>Add new task</h3>
-<form action="/add/task/{{ listId }}" method="POST">
+<form action="/add/task/{{ list.list_id }}" method="POST">
     <div>
         Task: <input type="text" name="task-name">
         <br>

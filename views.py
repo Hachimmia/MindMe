@@ -1,13 +1,14 @@
 import json
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from models import Note
+from models import Note, List, Task
 from __init__ import db
 
 
 #define urls with blueprint
 views = Blueprint('views', __name__)
 
+#adding notes
 @views.route('/', methods=['GET', 'POST'])
 #decoretor to check if user is logged in
 @login_required
@@ -46,23 +47,42 @@ def delete_note():
 
 #Todo Lists and tasks
 
-@views.route('/todo')
+#@views.route('/todo')
+#@login_required
+#def show_lists():
+#    return render_template("todo.html", user=current_user, lists = List.query.all())
+
+@views.route('/list/<list_id>')
 @login_required
-def show_lists():
+def show_tasks(list_id):
+    return render_template("tasks.html", user=current_user, list=List.query.filter_by(list_id=id).first(), tasks=Task.query.filter_by(list_id=id).all())
+
+#@views.route('/add/list', methods=['POST'])
+#def add_list():
+
+    #return "List added! :)"ù
+
+#retrieve and add lists
+@views.route('/todo', methods=['GET', 'POST'])
+#decoretor to check if user is logged in
+@login_required
+def todo():
+    if request.method == 'POST':
+        list = request.form.get('list')
+
+        if len(list) < 1:
+            flash('Please write a note before add it to your MindMe', category='error')
+        else:
+            new_list = List(list=list, user_id=current_user.id)
+            db.session.add(new_list)
+            db.session.commit()
+
+            flash('List added! :)')
+
     return render_template("todo.html", user=current_user)
 
-@views.route('/list/<listId>')
-@login_required
-def show_tasks(listId):
-    return render_template("tasks.html", user=current_user, listId=listId)
-
-@views.route('/add/list', methods=['POST'])
-def add_list():
-    #todo: add list
-    return "List added! :)"
-
-@views.route('/add/task/<listId>', methods=['POST'])
-def add_task(listId):
+@views.route('/add/task/<list_idd>', methods=['POST'])
+def add_task(list_id):
     #todo add task
     return "Task added! :)"
 

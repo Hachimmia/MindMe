@@ -6,16 +6,16 @@
 <h1 align="center">To Do Lists</h1>
 <br>
 <ul>
-    <h3><li><a href="/list/1">List1</a></li></h3>
-    <h3><li><a href="/list/2">List2</a></li></h3>
-    <h3><li><a href="/list/3">List3</a></li></h3>
+    {% for list in user.list %}
+        <h3><li><a href="/list/{{ list_id }}">{{ list.list }}</a></li></h3>
+    {% endfor %}
 </ul>
 <br>
 <br>
 <h3>Add new List</h3>
-<form action="/add/list" method="POST">
+<form action="/todo" method="POST">
     <div>
-        List name: <input type="text" name="list-title">
+        List name: <input type="text" id="list" name="list">
         <br>
         <br>
         <input type="submit" value="Add List">

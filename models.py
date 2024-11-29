@@ -25,7 +25,7 @@ class Note(db.Model):
 class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     list = db.Column(db.String(100))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    #date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     task = db.relationship('Task')
 
