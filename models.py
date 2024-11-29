@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     #link every user to all the notes they create
     notes = db.relationship('Note')
     list = db.relationship('List')
-    task = db.relationship('Task')
+    #task = db.relationship('Task')
 
 #note table
 class Note(db.Model):
@@ -33,7 +33,7 @@ class List(db.Model):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(1000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    #date = db.Column(db.DateTime(timezone=True), default=func.now())
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     list_id = db.Column(db.Integer, db.ForeignKey('list.id'))
     

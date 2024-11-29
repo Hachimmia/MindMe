@@ -6,16 +6,16 @@
 <h1 align="center">{{ list.list }}'s Tasks</h1>
 <br>
 <ul>
-    {% for task in tasks %}
+   {% for task in list.task %}
         <li>{{ task.task }}</li>
     {% endfor %}
 </ul>
 <br>
 <br>
 <h3>Add new task</h3>
-<form action="/add/task/{{ list.list_id }}" method="POST">
+<form action="/todo/{{ list.id }}" method="POST">
     <div>
-        Task: <input type="text" name="task-name">
+        Task: <input type="text" id="task" name="task">
         <br>
         <br>
         <input type="submit" value="Add Task">
