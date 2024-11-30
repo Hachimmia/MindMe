@@ -66,7 +66,42 @@ def todo():
 
     return render_template("todo.html", user=current_user)
 
-#retrieve and add lists
+#delete list
+@views.route('/delete-list/<list_id>', methods=['POST'])
+@login_required
+def delete_list(list_id):
+    list_ = List.query.get(list_id)
+    if list_ and list_.user_id == current_user.id:  # Verify the list belongs to the current user
+        # Optionally delete tasks associated with the list
+        Task.query.filter_by(list_id=list_.id).delete()
+        db.session.delete(list_)
+        db.session.commit()
+        flash('List deleted!', category='success')
+    else:
+        flash('List not found or unauthorized action!', category='error')
+
+    return redirect(url_for('views.todo'))
+
+#update list
+@views.route('/update-list/<list_id>', methods=['POST'])
+@login_required
+def update_list(list_id):
+    list_ = List.query.get(list_id)
+    if list_ and list_.user_id == current_user.id:  # Verify ownership
+        new_list_name = request.form.get('new_list_name')
+        if len(new_list_name) < 1:
+            flash('List name cannot be empty!', category='error')
+        else:
+            list_.list = new_list_name
+            db.session.commit()
+            flash('List updated!', category='success')
+    else:
+        flash('List not found or unauthorized action!', category='error')
+
+    return redirect(url_for('views.todo'))
+
+
+#retrieve and add tasks
 @views.route('/todo/<list_id>', methods=['GET', 'POST'])
 @login_required
 def tasks(list_id):
@@ -87,5 +122,42 @@ def tasks(list_id):
             flash('Task added! :)')
 
     return render_template("tasks.html", user=current_user, list=list_)
+
+#delete task
+@views.route('/delete-task/<task_id>', methods=['POST'])
+@login_required
+def delete_task(task_id):
+    # Retrieve the task by ID
+    task = Task.query.get(task_id)
+    if task: 
+        db.session.delete(task)
+        db.session.commit()
+        flash('Task deleted!', category='success')
+    else:
+        flash('Task not found or unauthorized action!', category='error')
+
+    return redirect(request.referrer or url_for('views.todo'))
+
+#update task
+@views.route('/update-task/<task_id>', methods=['POST'])
+@login_required
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    if task: 
+        new_task_content = request.form.get('new_task_content')
+        if len(new_task_content) < 1:
+            flash('Task content cannot be empty!', category='error')
+        else:
+            task.task = new_task_content
+            db.session.commit()
+            flash('Task updated!', category='success')
+    else:
+        flash('Task not found or unauthorized action!', category='error')
+
+    return redirect(request.referrer or url_for('views.todo'))
+
+
+
+
 
 

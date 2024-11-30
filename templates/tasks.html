@@ -7,7 +7,16 @@
 <br>
 <ul>
    {% for task in list.task %}
-        <li>{{ task.task }}</li>
+        <li>
+            {{ task.task }}
+            <form action="/delete-task/{{ task.id }}" method="POST" style="display:inline;">
+                <button type="submit" style="color: red;">Delete</button>
+            </form>
+            <form action="/update-task/{{ task.id }}" method="POST" style="display:inline;">
+                <input type="text" name="new_task_content" placeholder="Edit task" required>
+                <button type="submit" style="color: blue;">Update</button>
+            </form>
+        </li>
     {% endfor %}
 </ul>
 <br>
