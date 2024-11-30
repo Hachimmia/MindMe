@@ -8,13 +8,20 @@
 <ul>
    {% for task in list.task %}
         <li>
+            <!--style="{% if task.completed %}text-decoration: line-through;{% endif %}"
+            <form action="/toggle-task/{{ task.id }}" method="POST" style="display:inline;">
+                <input 
+                    type="checkbox" 
+                    name="completed" 
+                    onchange="this.form.submit();" 
+                    {% if task.completed %}checked{% endif %}>-->
             {{ task.task }}
             <form action="/delete-task/{{ task.id }}" method="POST" style="display:inline;">
-                <button type="submit" style="color: red;">Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
             <form action="/update-task/{{ task.id }}" method="POST" style="display:inline;">
                 <input type="text" name="new_task_content" placeholder="Edit task" required>
-                <button type="submit" style="color: blue;">Update</button>
+                <button type="submit" class="btn btn-warning btn-sm">Update</button>
             </form>
         </li>
     {% endfor %}

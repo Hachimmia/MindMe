@@ -36,4 +36,5 @@ class Task(db.Model):
     #date = db.Column(db.DateTime(timezone=True), default=func.now())
     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     list_id = db.Column(db.Integer, db.ForeignKey('list.id'))
+    #completed = db.Column(db.Boolean, default=False)
     

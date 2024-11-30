@@ -1,8 +1,8 @@
 {% extends "base.html" %} 
 <!--name of the page that will be shown on the tab-->
-{% block title %}Home{% endblock %}
+{% block title %}Notes{% endblock %}
 
-{% block content %}
+<!--
 <h1 align="center">Notes</h1>
 <br>
 <ul class="list-group li-group-flush" id="notes">
@@ -11,6 +11,56 @@
         <button type="button" class="close" onClick="deleteNote({{ note.id }})">
             <span aria-hidden="true">&times;</span>
         </button>
+    </li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br>
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+</form>
+-->
+{% block content %}
+<h1 align="center">Welcome, {{user.username}}!</h1>
+<br>
+<h1 align="center">Notes</h1>
+<br>
+<ul class="list-group li-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        {{ note.note }}
+        <!--Delete Button-->
+        <button type="button" class="btn btn-danger btn-sm" onClick="deleteNote({{ note.id }})">
+            Delete
+        </button>
+
+        <!--Edit Button-->
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editNoteModal{{ note.id }}">
+            Edit
+        </button>
+
+        <!-- Modal for Editing Notes -->
+        <div class="modal fade" id="editNoteModal{{ note.id }}" tabindex="-1" role="dialog" aria-labelledby="editNoteModalLabel{{ note.id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editNoteModalLabel{{ note.id }}">Edit Note</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/update-note/{{ note.id }}" method="POST">
+                            <textarea name="note" class="form-control" required>{{ note.note }}</textarea>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Update Note</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </li>
     {% endfor %}
 </ul>

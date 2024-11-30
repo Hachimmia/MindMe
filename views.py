@@ -1,8 +1,9 @@
 import json
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from models import Note, List, Task
+from models import Note, List, Task, User
 from __init__ import db
+from werkzeug.security import generate_password_hash
 
 
 #define urls with blueprint
@@ -44,6 +45,29 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+# Update Note
+@views.route('/update-note/<int:note_id>', methods=['POST'])
+@login_required
+def update_note(note_id):
+    # Get the note by its ID
+    note = Note.query.get(note_id)
+    if note:
+        # Check if the current user is the owner of the note
+        if note.user_id == current_user.id:
+            # Get the updated note content from the form
+            updated_note = request.form.get('note')
+            # Update the note's content
+            note.note = updated_note
+            db.session.commit()
+            flash('Note updated successfully!', category='success')
+        else:
+            flash('You do not have permission to update this note.', category='error')
+    else:
+        flash('Note not found.', category='error')
+
+    return redirect(url_for('views.home'))
+
 
 #Todo Lists and tasks
 
@@ -155,6 +179,63 @@ def update_task(task_id):
         flash('Task not found or unauthorized action!', category='error')
 
     return redirect(request.referrer or url_for('views.todo'))
+
+#task checkbox
+#@views.route('/toggle-task/<task_id>', methods=['POST'])
+#@login_required
+#def toggle_task(task_id):
+#    task = Task.query.get(task_id)
+#    if task: #and task.list.user_id == current_user.id:  # Verify the task belongs to the user
+#        task.completed = not task.completed  # Toggle the completion status
+#        db.session.commit()
+#        flash('Task updated!', category='success')
+#    else:
+#        flash('Task not found or unauthorized action!', category='error')
+
+#    return redirect(request.referrer)
+
+#user profile
+@views.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    # Fetch the logged-in user's data
+    user = current_user
+
+    if request.method == 'POST':
+        # Handle profile updates (e.g., update username, password)
+        username = request.form.get('username')
+        email = request.form.get('email')
+        
+        # check if the email is being updated and if it's already in use
+        if email != user.email:
+            existing_user = User.query.filter_by(email=email).first()
+            if existing_user:
+                flash('This email is already associated with another account.', category='error')
+            else:
+                user.email = email
+        
+        # check username
+        if username != user.username:
+            user.username = username
+
+        if 'password' in request.form:
+            password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+
+            if password != confirm_password:
+                flash('Passwords do not match', category='error')
+            elif len(password) < 6:
+                flash('Password must be at least 6 characters', category='error')
+            else:
+                user.password = generate_password_hash(password, method='pbkdf2:sha256')
+                db.session.commit()
+                flash('Password updated successfully!', category='success')
+
+        # Commit the changes to the database
+        db.session.commit()
+        flash('Profile updated successfully!', category='success')
+
+    return render_template('profile.html', user=user)
 
 
 
