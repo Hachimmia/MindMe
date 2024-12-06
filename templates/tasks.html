@@ -16,6 +16,7 @@
                     onchange="this.form.submit();" 
                     {% if task.completed %}checked{% endif %}>-->
             {{ task.task }}
+            <br>
             <form action="/delete-task/{{ task.id }}" method="POST" style="display:inline;">
                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>

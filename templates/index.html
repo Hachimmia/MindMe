@@ -23,14 +23,24 @@
 </form>
 -->
 {% block content %}
-<h1 align="center">Welcome, {{user.username}}!</h1>
 <br>
-<h1 align="center">Notes</h1>
+<br>
+<h1 class="welcome">Welcome, {{user.username}}!</h1>
+<br>
+<h1 class="notes">Notes</h1>
+<br>
+<div align="center">
+    <a class=" btn btn-sm notelink" href="#note">Add a note</a>
+    <a class=" btn btn-sm notelink" href="#end">Scroll down</a>
+</div>
+<br>
 <br>
 <ul class="list-group li-group-flush" id="notes">
     {% for note in user.notes %}
     <li class="list-group-item">
         {{ note.note }}
+        <br>
+        <br>
         <!--Delete Button-->
         <button type="button" class="btn btn-danger btn-sm" onClick="deleteNote({{ note.id }})">
             Delete
@@ -52,7 +62,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/update-note/{{ note.id }}" method="POST">
+                        <form action="/update-note/{{ note.id }}" method="POST" >
                             <textarea name="note" class="form-control" required>{{ note.note }}</textarea>
                             <br>
                             <button type="submit" class="btn btn-primary">Update Note</button>
@@ -62,13 +72,21 @@
             </div>
         </div>
     </li>
+    <br>
     {% endfor %}
 </ul>
+<div>
+    <p id="end"></p>
+</div>
+<br>
+<br>
 <form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
+    <textarea name="note" id="note" class="form-control"  placeholder="Write here..."></textarea>
     <br>
     <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+        <button type="submit" class="btn buttonsubmit">Add Note</button>
     </div>
 </form>
+<br>
+<br>
 {% endblock %}

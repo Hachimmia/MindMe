@@ -3,13 +3,14 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from models import Note, List, Task, User
 from __init__ import db
+from sqlalchemy import desc
 from werkzeug.security import generate_password_hash
 
 
 #define urls with blueprint
 views = Blueprint('views', __name__)
 
-#adding notes
+#adding and retrieve notes
 @views.route('/', methods=['GET', 'POST'])
 #decoretor to check if user is logged in
 @login_required
@@ -24,10 +25,11 @@ def home():
             db.session.add(new_note)
             db.session.commit()
 
-            flash('Note added! :)')
+            flash('Note added! :)')  
 
     return render_template("index.html", user=current_user)
-
+        #note = Note.query.filter_by(user_id=current_user.id).order_by(desc(Note.date)).all()
+        
 #for deleting notes
 
 @views.route('/delete-note', methods=['POST'])

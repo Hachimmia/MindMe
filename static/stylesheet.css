@@ -1,0 +1,39 @@
+body {
+    background-color:#012840;
+    /* #203140 !important;*/
+    color: beige;
+}
+h1{
+    text-align:center;
+}
+.notes{
+    font-family: "lucinda handwriting";
+}
+.welcome{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.buttonsubmit{
+    background-color: #F2B694 !important;
+}
+.notelink{
+    text-decoration: none;
+    color: #F2B694;
+    border-color: #F2B694;
+    background: #012840;
+}
+.footer{
+    background-color: #212529;
+    border: none !important;
+    margin: none !important;
+    text-align: center;
+}
+
+textarea{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+li{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
