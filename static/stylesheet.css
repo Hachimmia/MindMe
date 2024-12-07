@@ -30,10 +30,11 @@ h1{
 }
 .footer{
     background-color: #212529;
-    border: none !important;
-    margin: none !important;
     text-align: center;
-    min-height: 30vh; display: flex; flex-direction: column;
+    /*border: none !important;
+    margin: none !important;
+    
+    min-height: 30vh; display: flex; flex-direction: column;*/
 
 }
 
@@ -105,4 +106,13 @@ p{
     background-color: #6C0303;
     color: #F2B694;
 }
-
+.logo{
+    max-width: 50%;
+max-height: 50%;
+    text-align: center;
+}
+.logonav{
+    max-width: 10%;
+    max-height: 10%;
+    float: right !important;
+}
