@@ -3,26 +3,35 @@
 {% block title %}SignUp{% endblock %}
 
 {% block content %}
+<br>
+<br>
+<div class="login container">
 <form method="POST">
-    <h3 align="center">Sign Up</h3>
+    <h3 align="center" class="welcome">Sign Up</h3>
     <div class="form-group">
         <label for="email">Email Address</label>
         <!--we use the name of the input to define it in other files-->
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com">
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username">
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="At least 6 characters password">
     </div>
     <div class="form-group">
         <label for="passconfirm">Password (Confirm)</label>
-        <input type="password" class="form-control" id="passconfirm" name="passconfirm" placeholder="Confirm your Password">
+        <input type="password" class="form-control" id="passconfirm" name="passconfirm" placeholder="Rewrite password correctly">
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+    <div align="center">
+        <button type="submit" class="btn buttonsubmit">Submit</button>
+    </div>
 </form>
+</div>
+<br>
+<br>
 {% endblock %}

@@ -3,33 +3,46 @@
 {% block title %}ToDo{% endblock %}
 
 {% block content %}
-<h1 align="center">To Do Lists</h1>
+<br>
+<br>
+<h1 align="center" class="notes">To Do Lists</h1>
+<br>
+<div align="center">
+    <a class=" btn btn-sm notelink" href="#list">Add a list</a>
+    <a class=" btn btn-sm notelink" href="#end">Scroll down</a>
+</div>
+<br>
 <br>
 <ul>
     {% for list in user.list %}
         <h3>
-            <li>
-                <a href="/todo/{{ list.id }}">{{ list.list }}</a>
-                <form action="/delete-list/{{ list.id }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
+            <li class="list-group-item" align="center">
+                <a class="lists" href="/todo/{{ list.id }}">{{ list.list }}</a>
+                <form action="/delete-list/{{ list.id }}" method="POST" style="display:inline;" >
+                    <button type="submit" class=" btn btndelete btn-sm">Delete</button>
+                </form><br>
                 <form action="/update-list/{{ list.id }}" method="POST" style="display:inline;">
-                    <input type="text" name="new_list_name" placeholder="Edit list name" required>
-                    <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                    <input type="text" name="new_list_name"class="formlist" placeholder="Edit here..." required>
+                    <button type="submit" class="btn btn-warning btnupdate btn-sm">Update</button>
                 </form>
             </li>
         </h3>
+        <br>
     {% endfor %}
+    <div>
+        <p id="end"></p>
+    </div>
 </ul>
 <br>
+<h3 class="welcome">Add a new List</h3>
 <br>
-<h3>Add new List</h3>
 <form action="/todo" method="POST">
     <div>
-        List name: <input type="text" id="list" name="list">
+        <p>List name: <input type="text" id="list" name="list" placeholder="Write here..."></p>
         <br>
-        <br>
-        <input type="submit" value="Add List">
+        <button type="submit" value="Add List" class="btn buttonsubmit">Add List</button>
+        <!--<input type="submit" value="Add List">-->
     </div>
+    <br><br>
 </form>
 {% endblock %}

@@ -25,7 +25,7 @@
 {% block content %}
 <br>
 <br>
-<h1 class="welcome">Welcome, {{user.username}}!</h1>
+<h1 class="welcome">Welcome to <span class="mindme">MindMe</span>, {{user.username}} ッ</h1>
 <br>
 <h1 class="notes">Notes</h1>
 <br>
@@ -42,30 +42,30 @@
         <br>
         <br>
         <!--Delete Button-->
-        <button type="button" class="btn btn-danger btn-sm" onClick="deleteNote({{ note.id }})">
+        <button type="button" class="btn btndeletenote btn-sm" onClick="deleteNote({{ note.id }})">
             Delete
         </button>
 
         <!--Edit Button-->
-        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editNoteModal{{ note.id }}">
+        <button type="button" class="btn btn-warning btnupdate btn-sm" data-toggle="modal" data-target="#editNoteModal{{ note.id }}">
             Edit
         </button>
 
-        <!-- Modal for Editing Notes -->
+        <!--Editing Notes -->
         <div class="modal fade" id="editNoteModal{{ note.id }}" tabindex="-1" role="dialog" aria-labelledby="editNoteModalLabel{{ note.id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editNoteModalLabel{{ note.id }}">Edit Note</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close modalbtt" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="x-btt">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form action="/update-note/{{ note.id }}" method="POST" >
                             <textarea name="note" class="form-control" required>{{ note.note }}</textarea>
                             <br>
-                            <button type="submit" class="btn btn-primary">Update Note</button>
+                            <button type="submit" class="btn buttonsubmit">Update Note</button>
                         </form>
                     </div>
                 </div>
@@ -78,7 +78,6 @@
 <div>
     <p id="end"></p>
 </div>
-<br>
 <br>
 <form method="POST">
     <textarea name="note" id="note" class="form-control"  placeholder="Write here..."></textarea>

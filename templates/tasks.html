@@ -3,7 +3,16 @@
 {% block title %}ToDo{% endblock %}
 
 {% block content %}
-<h1 align="center">{{ list.list }}'s Tasks</h1>
+<br>
+<a class=" btn btn-sm notelink" href="/todo">Go Back</a>
+<br>
+<h1 align="center" class="notes">{{ list.list }}'s Tasks</h1>
+<br>
+<div align="center">
+    <a class=" btn btn-sm notelink" href="#task">Add a Task</a>
+    <a class=" btn btn-sm notelink" href="#end">Scroll Down</a>
+</div>
+<br>
 <br>
 <ul>
    {% for task in list.task %}
@@ -16,26 +25,30 @@
                     onchange="this.form.submit();" 
                     {% if task.completed %}checked{% endif %}>-->
             {{ task.task }}
-            <br>
             <form action="/delete-task/{{ task.id }}" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <button type="submit" class="btn btndelete btn-sm">Delete</button>
             </form>
             <form action="/update-task/{{ task.id }}" method="POST" style="display:inline;">
-                <input type="text" name="new_task_content" placeholder="Edit task" required>
-                <button type="submit" class="btn btn-warning btn-sm">Update</button>
+                <input type="text" name="new_task_content" placeholder="Edit task..." required>
+                <button type="submit" class="btn btn-warning btnupdate btn-sm">Update</button>
             </form>
         </li>
+        <br>
     {% endfor %}
+    <div>
+        <p id="end"></p>
+    </div>
 </ul>
 <br>
+<h3 class="welcome">Add new task</h3>
 <br>
-<h3>Add new task</h3>
 <form action="/todo/{{ list.id }}" method="POST">
     <div>
-        Task: <input type="text" id="task" name="task">
+        <p>Task: <input type="text" id="task" name="task" placeholder="Write here..."></p>
         <br>
-        <br>
-        <input type="submit" value="Add Task">
+        <button type="submit" value="Add Task" class="btn buttonsubmit">Add Task</button>
     </div>
 </form>
+<br>
+<br>
 {% endblock %}
