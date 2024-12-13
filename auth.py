@@ -53,7 +53,7 @@ def signup():
 
         user = User.query.filter_by(email=email).first()
         if user: 
-            flash('This email is already used by another account', category='error')
+            flash('This email is already used by another user', category='error')
         elif len(email) < 5:
             #message using flash
             flash('Email must be greater than 4 characters.', category='error')

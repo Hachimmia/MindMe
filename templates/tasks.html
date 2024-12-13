@@ -1,0 +1,54 @@
+{% extends "base.html" %} 
+<!--name of the page that will be shown on the tab-->
+{% block title %}ToDo{% endblock %}
+
+{% block content %}
+<br>
+<a class=" btn btn-sm notelink" href="/todo">Go Back</a>
+<br>
+<h1 align="center" class="notes">{{ list.list }}'s Tasks</h1>
+<br>
+<div align="center">
+    <a class=" btn btn-sm notelink" href="#task">Add a Task</a>
+    <a class=" btn btn-sm notelink" href="#end">Scroll Down</a>
+</div>
+<br>
+<br>
+<ul>
+   {% for task in list.task %}
+        <li>
+            <!--style="{% if task.completed %}text-decoration: line-through;{% endif %}"
+            <form action="/toggle-task/{{ task.id }}" method="POST" style="display:inline;">
+                <input 
+                    type="checkbox" 
+                    name="completed" 
+                    onchange="this.form.submit();" 
+                    {% if task.completed %}checked{% endif %}>-->
+            {{ task.task }}
+            <form action="/delete-task/{{ task.id }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btndelete btn-sm">Delete</button>
+            </form>
+            <form action="/update-task/{{ task.id }}" method="POST" style="display:inline;">
+                <input type="text" name="new_task_content" placeholder="Edit task..." required>
+                <button type="submit" class="btn btn-warning btnupdate btn-sm">Update</button>
+            </form>
+        </li>
+        <br>
+    {% endfor %}
+    <div>
+        <p id="end"></p>
+    </div>
+</ul>
+<br>
+<h3 class="welcome">Add new task</h3>
+<br>
+<form action="/todo/{{ list.id }}" method="POST">
+    <div>
+        <p>Task: <input type="text" id="task" name="task" placeholder="Write here..."></p>
+        <br>
+        <button type="submit" value="Add Task" class="btn buttonsubmit">Add Task</button>
+    </div>
+</form>
+<br>
+<br>
+{% endblock %}

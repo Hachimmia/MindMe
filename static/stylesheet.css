@@ -1,0 +1,118 @@
+body {
+    background-color:#012840;
+    /* #203140 !important;*/
+    color: beige;
+}
+
+h1{
+    text-align:center;
+}
+.notes{
+    font-family: "lucinda handwriting";
+}
+.welcome{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.buttonsubmit{
+    background-color: #F2B694;
+    font-weight: 500;
+}
+.buttonsubmit:hover{
+    background-color: #e3834c;
+    color: beige
+}
+.notelink{
+    text-decoration: none;
+    color: #F2B694;
+    border-color: #F2B694;
+    background: #012840;
+}
+.footer{
+    background-color: #212529;
+    text-align: center;
+    /*border: none !important;
+    margin: none !important;
+    
+    min-height: 30vh; display: flex; flex-direction: column;*/
+
+}
+
+textarea{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+li{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.mindme{
+    color: #F27E63;
+}
+.lists{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: beige;
+    text-decoration: none;
+}
+.lists:hover{
+    color: #F27E63;
+}
+li:hover{
+    color: #F27E63;
+}
+.formlist{
+    font-size: 15px !important;
+    width: 200px;
+    
+}
+.btndelete{
+    background-color: #A60303;
+    color: beige;
+}
+.btndelete:hover{
+    background-color: rgb(166, 3, 3, 50%) !important;
+    color: beige;
+}
+.btndeletenote{
+    background-color: #A60303;
+    color: beige;
+}
+.btndeletenote:hover{
+    background-color: #6C0303 !important;
+    color: beige;
+}
+.btnupdate:hover{
+    background-color: #F29F05;
+}
+p{
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.profile{
+    width: 50%;
+}
+.login{
+    width: 50%;
+}
+.modalbtt{
+    margin:2px;
+    padding: 0px;
+    border: 1px;
+    background-color: #A60303;
+}
+.x-btt{
+    color: beige;
+}
+.x-btt:hover{
+    background-color: #6C0303;
+    color: #F2B694;
+}
+.logo{
+    max-width: 50%;
+max-height: 50%;
+    text-align: center;
+}
+.logonav{
+    max-width: 10%;
+    max-height: 10%;
+    float: right !important;
+}

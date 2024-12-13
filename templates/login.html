@@ -6,19 +6,30 @@
 
 <!--var that I want to be pass from auth.py
 {{ test }}-->
-
+ <br>
+ <br>
+ <h1 class="welcome">Welcome to <span class="mindme">MindMe</span></h1>
+ <br>
+<div class="login container">
 <form method="POST">
-    <h3 align="center">Login</h3>
+    <h3 align="center" class="welcome">Login</h3>
+    <br>
     <div class="form-group">
         <label for="email">Email Address</label>
         <!--we use the name of the input to define it in other files-->
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+        <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com">
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+    </div>
+    <br>
+    <div align="center">
+        <button type="submit" class="btn buttonsubmit">Login</button>
+    </div>
 </form>
+</div>
+<br>
+<br>
 {% endblock %}
